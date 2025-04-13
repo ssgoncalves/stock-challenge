@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Stock\Domain\Tax\Rules;
 
 use Stock\Domain\Enums\OperationType;
-use Stock\Domain\Tax\TaxableOperation;
+use Stock\Domain\Tax\ProcessedOperation;
 use Stock\Domain\Tax\Rules\Contracts\Rule;
 
 readonly class Sell implements Rule
@@ -18,7 +18,7 @@ readonly class Sell implements Rule
     {
     }
 
-    public function calculate(TaxableOperation $operation): float
+    public function calculate(ProcessedOperation $operation): float
     {
         if (!$this->supports($operation)) {
             return 0.0;
@@ -31,7 +31,7 @@ readonly class Sell implements Rule
         );
     }
 
-    public function supports(TaxableOperation $operation): bool
+    public function supports(ProcessedOperation $operation): bool
     {
         return $operation->type === OperationType::SELL
             && $operation->profit > self::MAX_TAX_FREE_PROFIT;

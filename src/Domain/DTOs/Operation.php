@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Stock\Domain\Tax;
-
+namespace Stock\Domain\DTOs;
 
 use Stock\Domain\Enums\OperationType;
 
-class TaxableOperation
+readonly class Operation
 {
     public function __construct(
         public OperationType $type,
-        public float         $profit,
+        public int $quantity,
+        public float $price,
     )
     {
     }

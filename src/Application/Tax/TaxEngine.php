@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Stock\Application\Tax;
 
-use Stock\Domain\Tax\TaxableOperation;
+use Stock\Domain\Tax\ProcessedOperation;
 use Stock\Domain\Tax\Rules\Contracts\Rule;
 
 readonly class TaxEngine
@@ -23,10 +23,10 @@ readonly class TaxEngine
      * However, this strategy can be changed — for example, to apply only the first matching rule,
      * use the maximum value, or any other aggregation logic.
      *
-     * @param TaxableOperation $operation The input representing a single financial operation.
+     * @param ProcessedOperation $operation The input representing a single financial operation.
      * @return float The total tax calculated from all applicable rules.
      */
-    public function calculate(TaxableOperation $operation): float
+    public function calculate(ProcessedOperation $operation): float
     {
         return array_reduce(
             array: $this->rules,

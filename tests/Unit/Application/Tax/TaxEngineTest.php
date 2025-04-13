@@ -8,7 +8,7 @@ use Mockery;
 use PHPUnit\Framework\TestCase;
 use Stock\Application\Tax\TaxEngine;
 use Stock\Domain\Enums\OperationType;
-use Stock\Domain\Tax\TaxableOperation;
+use Stock\Domain\Tax\ProcessedOperation;
 use Stock\Domain\Tax\Rules\Contracts\Rule;
 
 class TaxEngineTest extends TestCase
@@ -21,7 +21,7 @@ class TaxEngineTest extends TestCase
         $profit = 1000.0;
         $expectedTax = 200.0;
 
-        $taxableOperation = new TaxableOperation(
+        $taxableOperation = new ProcessedOperation(
             type: OperationType::SELL,
             profit: $profit,
         );
