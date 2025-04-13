@@ -1,6 +1,7 @@
 services:
   app:
-    image: php:8.4.5-fpm
     restart: always
+    build:
+      context: ./.docker/php
     volumes:
-      - ./:/var/www/
+      - ./:/var/www
