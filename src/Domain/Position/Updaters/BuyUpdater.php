@@ -33,7 +33,7 @@ class BuyUpdater implements PositionUpdater
 
         return new PositionUpdateResult(
             position: $position,
-            profit: 0,
+            compensatedProfit: 0,
         );
     }
 }

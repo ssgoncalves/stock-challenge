@@ -1,0 +1,112 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Tests\Unit\Domain\Position\Updaters;
+
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\TestCase;
+use Stock\Domain\DTOs\Operation;
+use Stock\Domain\Entities\Position;
+use Stock\Domain\Enums\OperationType;
+use Stock\Domain\Position\PositionUpdateResult;
+use Stock\Domain\Position\Updaters\BuyUpdater;
+use Stock\Domain\Position\Updaters\SellUpdater;
+
+class SellUpdaterTest extends TestCase
+{
+
+    #[DataProvider('getUpdateScenarios')]
+    public function testShouldUpdate(Position $position, Operation $operation, PositionUpdateResult $expected)
+    {
+        // Set
+        $updater = new SellUpdater();
+
+        // Actions
+        $result = $updater->update($position, $operation);
+
+        // Assertions
+        $this->assertEquals($expected, $result);
+    }
+
+    public static function getUpdateScenarios(): array
+    {
+        return [
+            'Sell operation with profit' => [
+                'position' => new Position(quantity: 10, averagePrice: 7.5, accumulatedLoss: 0),
+                'operation' => new Operation(type: OperationType::SELL, quantity: 5, price: 10),
+                'expected' => new PositionUpdateResult(
+                    position: new Position(quantity: 5, averagePrice: 7.5, accumulatedLoss: 0),
+                    compensatedProfit: 12.5,
+                ),
+            ],
+            'Sell operation with loss' => [
+                'position' => new Position(quantity: 10, averagePrice: 7.5, accumulatedLoss: 0),
+                'operation' => new Operation(type: OperationType::SELL, quantity: 5, price: 5),
+                'expected' => new PositionUpdateResult(
+                    position: new Position(quantity: 5, averagePrice: 7.5, accumulatedLoss: 12.5),
+                    compensatedProfit: 0,
+                ),
+            ],
+            'Sell operation with no profit or loss' => [
+                'position' => new Position(quantity: 10, averagePrice: 7.5, accumulatedLoss: 0),
+                'operation' => new Operation(type: OperationType::SELL, quantity: 5, price: 7.5),
+                'expected' => new PositionUpdateResult(
+                    position: new Position(quantity: 5, averagePrice: 7.5, accumulatedLoss: 0),
+                    compensatedProfit: 0,
+                ),
+            ],
+            'Sell all shares' => [
+                'position' => new Position(quantity: 10, averagePrice: 7.5, accumulatedLoss: 0),
+                'operation' => new Operation(type: OperationType::SELL, quantity: 10, price: 10),
+                'expected' => new PositionUpdateResult(
+                    position: new Position(quantity: 0, averagePrice: 0, accumulatedLoss: 0),
+                    compensatedProfit: 25,
+                ),
+            ],
+            'Sell operation with accumulated loss' => [
+                'position' => new Position(quantity: 10, averagePrice: 7.5, accumulatedLoss: 10),
+                'operation' => new Operation(type: OperationType::SELL, quantity: 5, price: 5),
+                'expected' => new PositionUpdateResult(
+                    position: new Position(quantity: 5, averagePrice: 7.5, accumulatedLoss: 22.5),
+                    compensatedProfit: 0,
+                ),
+            ],
+            'Sell operation with compensated loss' => [
+                'position' => new Position(quantity: 10, averagePrice: 7.5, accumulatedLoss: 10),
+                'operation' => new Operation(type: OperationType::SELL, quantity: 5, price: 10),
+                'expected' => new PositionUpdateResult(
+                    position: new Position(quantity: 5, averagePrice: 7.5, accumulatedLoss: 0),
+                    compensatedProfit: 2.5,
+                ),
+            ],
+        ];
+    }
+
+    #[DataProvider('getSupportsScenarios')]
+    public function testShouldSupports(Operation $operation, bool $expected): void
+    {
+        // Set
+        $updater = new SellUpdater();
+
+        // Actions
+        $result = $updater->supports($operation);
+
+        // Assertions
+        $this->assertSame($expected, $result);
+    }
+
+    public static function getSupportsScenarios(): array
+    {
+        return [
+            'Buy operation' => [
+                'operation' => new Operation(type: OperationType::BUY, quantity: 10, price: 7.5),
+                'expected' => false,
+            ],
+            'Sell operation' => [
+                'operation' => new Operation(type: OperationType::SELL, quantity: 10, price: 7.5),
+                'expected' => true,
+            ],
+        ];
+    }
+}

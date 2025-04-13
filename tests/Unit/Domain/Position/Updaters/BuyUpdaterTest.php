@@ -36,7 +36,7 @@ class BuyUpdaterTest extends TestCase
                 'operation' => new Operation(type: OperationType::BUY, quantity: 10, price: 7.5),
                 'expected' => new PositionUpdateResult(
                     position: new Position(quantity: 10, averagePrice: 7.5),
-                    profit: 0,
+                    compensatedProfit: 0,
                 )
             ],
             'Buy operation with existing position' => [
@@ -44,7 +44,7 @@ class BuyUpdaterTest extends TestCase
                 'operation' => new Operation(type: OperationType::BUY, quantity: 10, price: 7.5),
                 'expected' => new PositionUpdateResult(
                     position: new Position(quantity: 15, averagePrice: 8.33),
-                    profit: 0,
+                    compensatedProfit: 0,
                 ),
             ],
             'Buy operation with existing position and accumulated loss' => [
@@ -52,7 +52,7 @@ class BuyUpdaterTest extends TestCase
                 'operation' => new Operation(type: OperationType::BUY, quantity: 10, price: 7.5),
                 'expected' => new PositionUpdateResult(
                     position: new Position(quantity: 15, averagePrice: 8.33, accumulatedLoss: 100.0),
-                    profit: 0
+                    compensatedProfit: 0
                 ),
             ],
         ];
