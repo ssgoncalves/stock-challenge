@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Stock\Tax\Domain\Enums;
+namespace Stock\Domain\Enums;
 
 enum OperationType
 {
