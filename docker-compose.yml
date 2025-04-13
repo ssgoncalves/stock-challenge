@@ -1,0 +1,6 @@
+services:
+  app:
+    image: php:8.4.5-fpm
+    restart: always
+    volumes:
+      - ./:/var/www/
