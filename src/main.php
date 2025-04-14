@@ -3,6 +3,7 @@
 require __DIR__ . '/../vendor/autoload.php';
 
 use Stock\Domain\Shared\DTOs\Operation;
+use Stock\Infrastructure\Shared\Adapters\OperationInputAdapter;
 use Stock\Infrastructure\Taxation\CalculateTaxUseCaseFactory;
 
 $calculateTax = CalculateTaxUseCaseFactory::create();
@@ -34,13 +35,7 @@ $operations = json_decode($operationsJson, true);
 $list = [];
 
 foreach ($operations as $operation) {
-    $list[] = new Operation(
-        type: $operation['operation'] === 'sell'
-            ? Stock\Domain\Shared\Enums\OperationType::SELL
-            : Stock\Domain\Shared\Enums\OperationType::BUY,
-        quantity: $operation['quantity'],
-        price: $operation['unit-cost'],
-    );
+    $list[] = OperationInputAdapter::fromArray($operation);
 }
 
 

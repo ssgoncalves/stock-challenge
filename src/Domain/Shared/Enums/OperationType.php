@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Stock\Domain\Shared\Enums;
 
-enum OperationType
+enum OperationType: string
 {
-    case SELL;
+    case SELL = 'sell';
 
-    case BUY;
+    case BUY = 'buy';
 }
