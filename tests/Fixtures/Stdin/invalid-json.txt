@@ -1,0 +1,2 @@
+[{"operation":"buy", "unit-cost":100.0, "quantity":1000}]
+INVALID_JSON
