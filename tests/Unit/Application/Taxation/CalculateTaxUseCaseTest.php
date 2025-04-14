@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Application\Taxation;
+namespace Tests\Unit\Application\Taxation;
 
 use Mockery;
 use PHPUnit\Framework\TestCase;
@@ -34,6 +34,7 @@ class CalculateTaxUseCaseTest extends TestCase
         $updateResult = new PositionUpdateResult(
             position: new Position(10, 100.0, 0.0),
             compensatedProfit: 0.0,
+            operationValue: 1000
         );
 
         $operations = [$operation];
