@@ -6,11 +6,11 @@ namespace Tests\Unit\Domain\Position\Updaters;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use Stock\Domain\DTOs\Operation;
-use Stock\Domain\Entities\Position;
-use Stock\Domain\Enums\OperationType;
-use Stock\Domain\Position\PositionUpdateResult;
-use Stock\Domain\Position\Updaters\BuyUpdater;
+use Stock\Domain\Positioning\Position;
+use Stock\Domain\Positioning\PositionUpdateResult;
+use Stock\Domain\Positioning\Updaters\BuyUpdater;
+use Stock\Domain\Shared\DTOs\Operation;
+use Stock\Domain\Shared\Enums\OperationType;
 
 class BuyUpdaterTest extends TestCase
 {

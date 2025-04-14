@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Stock\Domain\Enums;
+namespace Stock\Domain\Shared\Enums;
 
 enum OperationType
 {

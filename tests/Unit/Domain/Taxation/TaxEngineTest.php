@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit\Application\Tax;
+namespace Tests\Unit\Domain\Taxation;
 
 use Mockery;
 use PHPUnit\Framework\TestCase;
-use Stock\Application\Tax\TaxEngine;
-use Stock\Domain\Enums\OperationType;
-use Stock\Domain\Tax\ProcessedOperation;
-use Stock\Domain\Tax\Rules\Contracts\Rule;
+use Stock\Domain\Shared\Enums\OperationType;
+use Stock\Domain\Taxation\ProcessedOperation;
+use Stock\Domain\Taxation\Rules\Contracts\Rule;
+use Stock\Domain\Taxation\TaxEngine;
 
 class TaxEngineTest extends TestCase
 {

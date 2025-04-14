@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Stock\Domain\Entities;
+namespace Stock\Domain\Positioning;
 
 readonly class Position
 {

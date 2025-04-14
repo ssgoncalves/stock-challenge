@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Stock\Domain\Tax;
+namespace Stock\Domain\Taxation;
 
 
-use Stock\Domain\Enums\OperationType;
+use Stock\Domain\Shared\Enums\OperationType;
 
 class ProcessedOperation
 {

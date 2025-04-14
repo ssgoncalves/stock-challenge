@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Stock\Domain\Position\Updaters;
+namespace Stock\Domain\Positioning\Updaters;
 
-use Stock\Domain\DTOs\Operation;
-use Stock\Domain\Entities\Position;
-use Stock\Domain\Enums\OperationType;
-use Stock\Domain\Position\Contracts\PositionUpdater;
-use Stock\Domain\Position\PositionUpdateResult;
+use Stock\Domain\Positioning\Contracts\PositionUpdater;
+use Stock\Domain\Positioning\Position;
+use Stock\Domain\Positioning\PositionUpdateResult;
+use Stock\Domain\Shared\DTOs\Operation;
+use Stock\Domain\Shared\Enums\OperationType;
 
 class BuyUpdater implements PositionUpdater
 {

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Stock\Domain\Tax\Rules;
+namespace Stock\Domain\Taxation\Rules;
 
-use Stock\Domain\Enums\OperationType;
-use Stock\Domain\Tax\ProcessedOperation;
-use Stock\Domain\Tax\Rules\Contracts\Rule;
+use Stock\Domain\Shared\Enums\OperationType;
+use Stock\Domain\Taxation\ProcessedOperation;
+use Stock\Domain\Taxation\Rules\Contracts\Rule;
 
 readonly class Sell implements Rule
 {

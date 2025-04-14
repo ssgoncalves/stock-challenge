@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Stock\Domain\DTOs;
+namespace Stock\Domain\Shared\DTOs;
 
-use Stock\Domain\Enums\OperationType;
+use Stock\Domain\Shared\Enums\OperationType;
 
 readonly class Operation
 {

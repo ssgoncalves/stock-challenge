@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit\Domain\Tax\Rules;
+namespace Tests\Unit\Domain\Taxation\Rules;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use Stock\Domain\Enums\OperationType;
-use Stock\Domain\Tax\ProcessedOperation;
-use Stock\Domain\Tax\Rules\Sell;
+use Stock\Domain\Shared\Enums\OperationType;
+use Stock\Domain\Taxation\ProcessedOperation;
+use Stock\Domain\Taxation\Rules\Sell;
 
 class SellTest extends TestCase
 {

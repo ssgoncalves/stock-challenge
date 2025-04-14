@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Stock\Application\Tax;
+namespace Stock\Domain\Taxation;
 
-use Stock\Domain\Tax\ProcessedOperation;
-use Stock\Domain\Tax\Rules\Contracts\Rule;
+use Stock\Domain\Taxation\Rules\Contracts\Rule;
 
 readonly class TaxEngine
 {

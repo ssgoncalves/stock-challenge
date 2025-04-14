@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Stock\Domain\Position\Contracts;
+namespace Stock\Domain\Positioning\Contracts;
 
-use Stock\Domain\DTOs\Operation;
-use Stock\Domain\Entities\Position;
-use Stock\Domain\Position\PositionUpdateResult;
+use Stock\Domain\Positioning\Position;
+use Stock\Domain\Positioning\PositionUpdateResult;
+use Stock\Domain\Shared\DTOs\Operation;
 
 interface PositionUpdater
 {

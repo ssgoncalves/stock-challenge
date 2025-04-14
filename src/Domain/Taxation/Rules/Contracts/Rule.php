@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Stock\Domain\Tax\Rules\Contracts;
+namespace Stock\Domain\Taxation\Rules\Contracts;
 
-use Stock\Domain\Tax\ProcessedOperation;
+use Stock\Domain\Taxation\ProcessedOperation;
 
 interface Rule
 {
