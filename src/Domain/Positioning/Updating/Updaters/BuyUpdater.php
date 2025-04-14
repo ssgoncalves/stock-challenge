@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Stock\Domain\Positioning\Updaters;
+namespace Stock\Domain\Positioning\Updating\Updaters;
 
 use Stock\Domain\Positioning\Contracts\PositionUpdater;
 use Stock\Domain\Positioning\Position;
-use Stock\Domain\Positioning\PositionUpdateResult;
+use Stock\Domain\Positioning\Updating\PositionUpdateResult;
 use Stock\Domain\Shared\DTOs\Operation;
 use Stock\Domain\Shared\Enums\OperationType;
 

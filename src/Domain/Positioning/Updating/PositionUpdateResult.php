@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Stock\Domain\Positioning;
+namespace Stock\Domain\Positioning\Updating;
+
+use Stock\Domain\Positioning\Position;
 
 readonly class PositionUpdateResult
 {

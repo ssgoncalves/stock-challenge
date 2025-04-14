@@ -7,8 +7,8 @@ namespace Tests\Unit\Domain\Position\Updaters;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Stock\Domain\Positioning\Position;
-use Stock\Domain\Positioning\PositionUpdateResult;
-use Stock\Domain\Positioning\Updaters\BuyUpdater;
+use Stock\Domain\Positioning\Updating\PositionUpdateResult;
+use Stock\Domain\Positioning\Updating\Updaters\BuyUpdater;
 use Stock\Domain\Shared\DTOs\Operation;
 use Stock\Domain\Shared\Enums\OperationType;
 
