@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 use Stock\Application\Taxation\CalculateTaxUseCase;
 use Stock\Application\Taxation\DTOs\TaxCalculationResult;
 use Stock\Domain\Positioning\Position;
-use Stock\Domain\Positioning\Updating\PositionUpdateHandler;
+use Stock\Domain\Positioning\Updating\PositionUpdaterHandler;
 use Stock\Domain\Positioning\Updating\PositionUpdateResult;
 use Stock\Domain\Shared\DTOs\Operation;
 use Stock\Domain\Shared\Enums\OperationType;
@@ -21,7 +21,7 @@ class CalculateTaxUseCaseTest extends TestCase
     public function testShouldExecute(): void
     {
         // Set
-        $positionUpdateHandler = Mockery::mock(PositionUpdateHandler::class);
+        $positionUpdateHandler = Mockery::mock(PositionUpdaterHandler::class);
         $taxEngine = Mockery::mock(TaxEngine::class);
         $operation = new Operation(type: OperationType::SELL, quantity: 10, price: 100.0);
         $expected = new TaxCalculationResult(tax: 100.53);

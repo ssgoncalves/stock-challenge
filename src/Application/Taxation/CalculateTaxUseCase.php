@@ -6,7 +6,7 @@ namespace Stock\Application\Taxation;
 
 use Stock\Application\Taxation\DTOs\TaxCalculationResult;
 use Stock\Domain\Positioning\Position;
-use Stock\Domain\Positioning\Updating\PositionUpdateHandler;
+use Stock\Domain\Positioning\Updating\PositionUpdaterHandler;
 use Stock\Domain\Shared\DTOs\Operation;
 use Stock\Domain\Taxation\ProcessedOperation;
 use Stock\Domain\Taxation\TaxEngine;
@@ -14,8 +14,8 @@ use Stock\Domain\Taxation\TaxEngine;
 readonly class CalculateTaxUseCase
 {
     public function __construct(
-        private PositionUpdateHandler $positionUpdateHandler,
-        private TaxEngine $taxEngine,
+        private PositionUpdaterHandler $positionUpdateHandler,
+        private TaxEngine              $taxEngine,
     )
     {
     }

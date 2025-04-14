@@ -1,4 +1,4 @@
-<?php /** @noinspection PhpPropertyCanBeReadonlyInspection */
+<?php
 
 declare(strict_types=1);
 
@@ -9,12 +9,12 @@ use Stock\Domain\Positioning\Contracts\PositionUpdater;
 use Stock\Domain\Positioning\Position;
 use Stock\Domain\Shared\DTOs\Operation;
 
-class PositionUpdateHandler
+class PositionUpdaterHandler
 {
     /**
      * @param array<0, PositionUpdater> $updaters
      */
-    public function __construct(private array $updaters)
+    public function __construct(private readonly array $updaters)
     {
     }
 

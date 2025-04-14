@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Stock\Infrastructure\Shared\factory;
+namespace Stock\Infrastructure\Shared\factories;
 
 use Stock\Domain\Shared\DTOs\Operation;
 use Stock\Infrastructure\Shared\Adapters\OperationInputAdapter;

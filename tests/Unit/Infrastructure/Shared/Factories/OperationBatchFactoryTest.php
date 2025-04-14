@@ -7,7 +7,7 @@ namespace Tests\Unit\Infrastructure\Shared\Factories;
 use PHPUnit\Framework\TestCase;
 use Stock\Domain\Shared\DTOs\Operation;
 use Stock\Domain\Shared\Enums\OperationType;
-use Stock\Infrastructure\Shared\factory\OperationBatchFactory;
+use Stock\Infrastructure\Shared\factories\OperationBatchFactory;
 
 class OperationBatchFactoryTest extends TestCase
 {

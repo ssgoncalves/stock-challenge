@@ -8,20 +8,20 @@ use Mockery;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Stock\Domain\Positioning\Position;
-use Stock\Domain\Positioning\Updating\PositionUpdateHandler;
+use Stock\Domain\Positioning\Updating\PositionUpdaterHandler;
 use Stock\Domain\Positioning\Updating\PositionUpdateResult;
 use Stock\Domain\Positioning\Updating\Updaters\SellUpdater;
 use Stock\Domain\Shared\DTOs\Operation;
 use Stock\Domain\Shared\Enums\OperationType;
 
-class PositionUpdateHandlerTest extends TestCase
+class PositionUpdaterHandlerTest extends TestCase
 {
 
     public function testShouldUpdate(): void
     {
         // Set
         $sellUpdater = Mockery::mock(SellUpdater::class);
-        $handler = new PositionUpdateHandler([$sellUpdater]);
+        $handler = new PositionUpdaterHandler([$sellUpdater]);
         $position = new Position();
         $operation = new Operation(
             type: OperationType::SELL,
@@ -56,7 +56,7 @@ class PositionUpdateHandlerTest extends TestCase
         // Set
         $buyUpdater = Mockery::mock(SellUpdater::class);
         $sellUpdater = Mockery::mock(SellUpdater::class);
-        $handler = new PositionUpdateHandler([$buyUpdater, $sellUpdater]);
+        $handler = new PositionUpdaterHandler([$buyUpdater, $sellUpdater]);
         $position = new Position();
         $operation = new Operation(
             type: OperationType::SELL,
@@ -94,7 +94,7 @@ class PositionUpdateHandlerTest extends TestCase
     public function testShouldReturnExceptionWhenNoUpdaterFound(): void
     {
         // Set
-        $handler = new PositionUpdateHandler([]);
+        $handler = new PositionUpdaterHandler([]);
         $position = new Position();
         $operation = new Operation(
             type: OperationType::SELL,

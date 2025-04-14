@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Stock\Infrastructure\Taxation;
 
 use Stock\Application\Taxation\CalculateTaxUseCase;
-use Stock\Domain\Positioning\Updating\PositionUpdateHandler;
+use Stock\Domain\Positioning\Updating\PositionUpdaterHandler;
 use Stock\Domain\Positioning\Updating\Updaters\BuyUpdater;
 use Stock\Domain\Positioning\Updating\Updaters\SellUpdater;
 use Stock\Domain\Taxation\Rules\Sell;
@@ -20,7 +20,7 @@ class CalculateTaxUseCaseFactory
 
         $taxEngine = new TaxEngine(rules: [new Sell()]);
 
-        $positionUpdateHandler = new PositionUpdateHandler(
+        $positionUpdateHandler = new PositionUpdaterHandler(
             updaters: [$sellUpdater, $buyUpdater],
         );
 

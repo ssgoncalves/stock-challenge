@@ -52,7 +52,7 @@ class StdinInputReaderTest extends TestCase
 
     private function getFixtureStream(string $filename): mixed
     {
-        $path = __DIR__ . '/../../../../Fixtures/Stdin/' . $filename;
+        $path = __DIR__ . '/../../../../Fixtures/Unit/Stdin/' . $filename;
         $stream = fopen('php://memory', 'r+');
         fwrite($stream, file_get_contents($path));
         rewind($stream);
