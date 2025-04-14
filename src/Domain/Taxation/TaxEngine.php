@@ -6,7 +6,7 @@ namespace Stock\Domain\Taxation;
 
 use Stock\Domain\Taxation\Rules\Contracts\Rule;
 
-readonly class TaxEngine
+class TaxEngine
 {
     /**
      * @param array<0, Rule> $rules

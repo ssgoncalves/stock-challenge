@@ -9,7 +9,7 @@ use Stock\Domain\Positioning\Contracts\PositionUpdater;
 use Stock\Domain\Positioning\Position;
 use Stock\Domain\Shared\DTOs\Operation;
 
-readonly class PositionUpdateHandler
+class PositionUpdateHandler
 {
     /**
      * @param array<0, PositionUpdater> $updaters
