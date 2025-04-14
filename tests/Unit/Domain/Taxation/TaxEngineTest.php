@@ -19,11 +19,13 @@ class TaxEngineTest extends TestCase
         $sellRule = Mockery::mock(Rule::class);
         $calculator = new TaxEngine([$sellRule]);
         $profit = 1000.0;
+        $operationValue = 1000.0;
         $expectedTax = 200.0;
 
         $taxableOperation = new ProcessedOperation(
             type: OperationType::SELL,
             profit: $profit,
+            operationValue: $operationValue,
         );
 
         // Expectations

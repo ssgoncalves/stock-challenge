@@ -20,6 +20,7 @@ readonly class Sell implements Rule
 
     public function calculate(ProcessedOperation $operation): float
     {
+
         if (!$this->supports($operation)) {
             return 0.0;
         }
@@ -34,6 +35,6 @@ readonly class Sell implements Rule
     public function supports(ProcessedOperation $operation): bool
     {
         return $operation->type === OperationType::SELL
-            && $operation->profit > self::MAX_TAX_FREE_PROFIT;
+            && $operation->operationValue > self::MAX_TAX_FREE_PROFIT;
     }
 }

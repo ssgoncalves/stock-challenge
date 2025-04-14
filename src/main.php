@@ -1,13 +1,17 @@
 <?php
 
+require __DIR__ . '/../vendor/autoload.php';
+
 use Stock\Application\Taxation\CalculateTaxUseCase;
 use Stock\Domain\Positioning\Updating\PositionUpdateHandler;
+use Stock\Domain\Positioning\Updating\Updaters\BuyUpdater;
 use Stock\Domain\Positioning\Updating\Updaters\SellUpdater;
+use Stock\Domain\Shared\DTOs\Operation;
 use Stock\Domain\Taxation\Rules\Sell;
 use Stock\Domain\Taxation\TaxEngine;
 
 $sellUpdater = new SellUpdater();
-$buyUpdater = new SellUpdater();
+$buyUpdater = new BuyUpdater();
 
 $taxEngine = new TaxEngine(rules: [new Sell()]);
 
@@ -20,42 +24,43 @@ $calculateTax = new CalculateTaxUseCase(
     taxEngine: $taxEngine,
 );
 
-$operation1 = new Stock\Domain\Shared\DTOs\Operation(
-    type: Stock\Domain\Shared\Enums\OperationType::BUY,
-    quantity: 10_000,
-    price: 10.0,
-);
+$operationsJson = '[{"operation":"buy", "unit-cost":10.00, "quantity": 100},
+{"operation":"sell", "unit-cost":15.00, "quantity": 50},
+{"operation":"sell", "unit-cost":15.00, "quantity": 50}]';
 
-$operation2 = new Stock\Domain\Shared\DTOs\Operation(
-    type: Stock\Domain\Shared\Enums\OperationType::SELL,
-    quantity: 5_000,
-    price: 2.0,
-);
+$operationsJson = '[{"operation":"buy", "unit-cost":10.00, "quantity": 10000},
+{"operation":"sell", "unit-cost":20.00, "quantity": 5000},
+{"operation":"sell", "unit-cost":5.00, "quantity": 5000}]';
 
-$operation3 = new Stock\Domain\Shared\DTOs\Operation(
-    type: Stock\Domain\Shared\Enums\OperationType::SELL,
-    quantity: 2_000,
-    price: 20.0,
-);
+$operationsJson = '[{"operation":"buy", "unit-cost":10.00, "quantity": 10000},
+{"operation":"sell", "unit-cost":5.00, "quantity": 5000},
+{"operation":"sell", "unit-cost":20.00, "quantity": 3000}]';
 
-$operation4 = new Stock\Domain\Shared\DTOs\Operation(
-    type: Stock\Domain\Shared\Enums\OperationType::SELL,
-    quantity: 2_000,
-    price: 20.0,
-);
+$operationsJson = '[{"operation":"buy", "unit-cost":10.00, "quantity": 10000},
+{"operation":"buy", "unit-cost":25.00, "quantity": 5000},
+{"operation":"sell", "unit-cost":15.00, "quantity": 10000}]';
 
-$operation5 = new Stock\Domain\Shared\DTOs\Operation(
-    type: Stock\Domain\Shared\Enums\OperationType::SELL,
-    quantity: 1_000,
-    price: 25.0,
-);
+$operationsJson = '[{"operation":"buy", "unit-cost":10.00, "quantity": 10000},
+{"operation":"buy", "unit-cost":25.00, "quantity": 5000},
+{"operation":"sell", "unit-cost":15.00, "quantity": 10000},
+{"operation":"sell", "unit-cost":25.00, "quantity": 5000}]';
 
-$result = $calculateTax->execute([
-    $operation1,
-    $operation2,
-    $operation3,
-    $operation4,
-    $operation5,
-]);
 
-var_dump($result);
+$operations = json_decode($operationsJson, true);
+
+$list = [];
+
+foreach ($operations as $operation) {
+    $list[] = new Operation(
+        type: $operation['operation'] === 'sell'
+            ? Stock\Domain\Shared\Enums\OperationType::SELL
+            : Stock\Domain\Shared\Enums\OperationType::BUY,
+        quantity: $operation['quantity'],
+        price: $operation['unit-cost'],
+    );
+}
+
+
+$result = $calculateTax->execute($list);
+
+var_dump(json_encode($result));

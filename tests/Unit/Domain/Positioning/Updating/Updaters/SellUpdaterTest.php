@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit\Domain\Position\Updaters;
+namespace Tests\Unit\Domain\Positioning\Updating\Updaters;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
@@ -37,6 +37,7 @@ class SellUpdaterTest extends TestCase
                 'expected' => new PositionUpdateResult(
                     position: new Position(quantity: 5, averagePrice: 7.5, accumulatedLoss: 0),
                     compensatedProfit: 12.5,
+                    operationValue: 50,
                 ),
             ],
             'Sell operation with loss' => [
@@ -45,6 +46,7 @@ class SellUpdaterTest extends TestCase
                 'expected' => new PositionUpdateResult(
                     position: new Position(quantity: 5, averagePrice: 7.5, accumulatedLoss: 12.5),
                     compensatedProfit: 0,
+                    operationValue: 25,
                 ),
             ],
             'Sell operation with no profit or loss' => [
@@ -53,6 +55,7 @@ class SellUpdaterTest extends TestCase
                 'expected' => new PositionUpdateResult(
                     position: new Position(quantity: 5, averagePrice: 7.5, accumulatedLoss: 0),
                     compensatedProfit: 0,
+                    operationValue: 37.5,
                 ),
             ],
             'Sell all shares' => [
@@ -61,6 +64,7 @@ class SellUpdaterTest extends TestCase
                 'expected' => new PositionUpdateResult(
                     position: new Position(quantity: 0, averagePrice: 0, accumulatedLoss: 0),
                     compensatedProfit: 25,
+                    operationValue: 100,
                 ),
             ],
             'Sell operation with accumulated loss' => [
@@ -69,6 +73,7 @@ class SellUpdaterTest extends TestCase
                 'expected' => new PositionUpdateResult(
                     position: new Position(quantity: 5, averagePrice: 7.5, accumulatedLoss: 22.5),
                     compensatedProfit: 0,
+                    operationValue: 25,
                 ),
             ],
             'Sell operation with compensated loss' => [
@@ -77,6 +82,7 @@ class SellUpdaterTest extends TestCase
                 'expected' => new PositionUpdateResult(
                     position: new Position(quantity: 5, averagePrice: 7.5, accumulatedLoss: 0),
                     compensatedProfit: 2.5,
+                    operationValue: 50,
                 ),
             ],
         ];

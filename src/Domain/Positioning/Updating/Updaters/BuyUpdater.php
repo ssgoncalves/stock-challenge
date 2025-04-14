@@ -34,6 +34,7 @@ class BuyUpdater implements PositionUpdater
         return new PositionUpdateResult(
             position: $position,
             compensatedProfit: 0,
+            operationValue: $newInvestment,
         );
     }
 }

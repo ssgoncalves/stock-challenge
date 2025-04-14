@@ -47,6 +47,7 @@ class SellUpdater implements PositionUpdater
         return new PositionUpdateResult(
             position: $position,
             compensatedProfit: $compensatedProfit,
+            operationValue: $sellValue,
         );
     }
 

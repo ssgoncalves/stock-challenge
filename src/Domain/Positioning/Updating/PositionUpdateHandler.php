@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection PhpPropertyCanBeReadonlyInspection */
 
 declare(strict_types=1);
 
@@ -21,6 +21,7 @@ class PositionUpdateHandler
 
     public function update(Position $position, Operation $operation): PositionUpdateResult
     {
+
         foreach ($this->updaters as $updater){
             if ($updater->supports(operation: $operation)) {
                 return $updater->update(

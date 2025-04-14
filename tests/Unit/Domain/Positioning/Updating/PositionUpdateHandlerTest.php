@@ -41,6 +41,7 @@ class PositionUpdateHandlerTest extends TestCase
             ->andReturn(new PositionUpdateResult(
                 position: new Position(10, 100.0, 0.0),
                 compensatedProfit: 0.0,
+                operationValue: 1000.0,
             ));
 
         // Actions
@@ -80,6 +81,7 @@ class PositionUpdateHandlerTest extends TestCase
             ->andReturn(new PositionUpdateResult(
                 position: new Position(10, 100.0, 0.0),
                 compensatedProfit: 0.0,
+                operationValue: 1000.0,
             ));
 
         // Actions

@@ -37,6 +37,7 @@ readonly class CalculateTaxUseCase
             $processedOperation = new ProcessedOperation(
                 type: $operation->type,
                 profit: $positionUpdateResult->compensatedProfit,
+                operationValue: $positionUpdateResult->operationValue,
             );
 
             $tax = $this->taxEngine->calculate(operation: $processedOperation);

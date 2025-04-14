@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit\Domain\Position\Updaters;
+namespace Tests\Unit\Domain\Positioning\Updating\Updaters;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
@@ -37,6 +37,7 @@ class BuyUpdaterTest extends TestCase
                 'expected' => new PositionUpdateResult(
                     position: new Position(quantity: 10, averagePrice: 7.5),
                     compensatedProfit: 0,
+                    operationValue: 75,
                 )
             ],
             'Buy operation with existing position' => [
@@ -45,6 +46,7 @@ class BuyUpdaterTest extends TestCase
                 'expected' => new PositionUpdateResult(
                     position: new Position(quantity: 15, averagePrice: 8.33),
                     compensatedProfit: 0,
+                    operationValue: 75,
                 ),
             ],
             'Buy operation with existing position and accumulated loss' => [
@@ -52,7 +54,8 @@ class BuyUpdaterTest extends TestCase
                 'operation' => new Operation(type: OperationType::BUY, quantity: 10, price: 7.5),
                 'expected' => new PositionUpdateResult(
                     position: new Position(quantity: 15, averagePrice: 8.33, accumulatedLoss: 100.0),
-                    compensatedProfit: 0
+                    compensatedProfit: 0,
+                    operationValue: 75,
                 ),
             ],
         ];

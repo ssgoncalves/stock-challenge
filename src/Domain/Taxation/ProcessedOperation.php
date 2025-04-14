@@ -12,6 +12,7 @@ class ProcessedOperation
     public function __construct(
         public OperationType $type,
         public float         $profit,
+        public float         $operationValue,
     )
     {
     }

@@ -29,59 +29,43 @@ class SellTest extends TestCase
     public static function getTaxScenarios(): array
     {
         return [
-            'Sell operation with taxable profit greater than 20000' => [
+            'Sell Operation with tax when the Operation value is greater than 20000' => [
                 'operation' => new ProcessedOperation(
                     type: OperationType::SELL,
-                    profit: 20001.0,
+                    profit: 1000.0,
+                    operationValue: 20001.0,
                 ),
-                'expected' => 4000.20,
+                'expected' => 200,
             ],
-            'Sell operation with taxable profit less than 20000' => [
+            'Sell Operation without tax when the Operation value is less than 20000' => [
                 'operation' => new ProcessedOperation(
                     type: OperationType::SELL,
-                    profit: 19999.0,
+                    profit: 1000.0,
+                    operationValue: 19999.0,
                 ),
                 'expected' => 0.0,
             ],
-            'Buy operation with taxable profit greater than 20000' => [
+            'Buy Operation without tax when the Operation value is less than 20000' => [
                 'operation' => new ProcessedOperation(
                     type: OperationType::BUY,
-                    profit: 20001.0,
+                    profit: 1000.0,
+                    operationValue: 19999.0,
                 ),
                 'expected' => 0.0,
             ],
-            'Buy operation with taxable profit less than 20000' => [
-                'operation' => new ProcessedOperation(
-                    type: OperationType::BUY,
-                    profit: 19999.0,
-                ),
-                'expected' => 0.0,
-            ],
-            'Sell operation with taxable profit equal to 20000' => [
+            'Sell Operation without tax when the Operation value is equal to 20000' => [
                 'operation' => new ProcessedOperation(
                     type: OperationType::SELL,
                     profit: 20000.0,
+                    operationValue: 20000,
                 ),
                 'expected' => 0.0,
             ],
-            'Buy operation with taxable profit equal to 20000' => [
-                'operation' => new ProcessedOperation(
-                    type: OperationType::BUY,
-                    profit: 20000.0,
-                ),
-                'expected' => 0.0,
-            ],
-            'Sell operation with taxable profit equal to 0' => [
+            'Sell Operation without tax when the Operation value is equal to 0' => [
                 'operation' => new ProcessedOperation(
                     type: OperationType::SELL,
                     profit: 0.0,
-                ),
-                'expected' => 0.0,
-            ],
-            'Buy operation with taxable profit equal to 0' => [
-                'operation' => new ProcessedOperation(
-                    type: OperationType::BUY,
-                    profit: 0.0,
+                    operationValue: 0.0,
                 ),
                 'expected' => 0.0,
             ],
