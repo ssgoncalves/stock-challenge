@@ -77,11 +77,20 @@ class SellUpdaterTest extends TestCase
                 ),
             ],
             'Sell operation with compensated loss' => [
+                'position' => new Position(quantity: 1000, averagePrice: 7.5, accumulatedLoss: 10),
+                'operation' => new Operation(type: OperationType::SELL, quantity: 1000, price: 25),
+                'expected' => new PositionUpdateResult(
+                    position: new Position(quantity: 0, averagePrice: 0, accumulatedLoss: 0),
+                    compensatedProfit: 17_490.0,
+                    operationValue: 25_000.0,
+                ),
+            ],
+            'Sell operation with profit below exemption limit should not compensate loss' => [
                 'position' => new Position(quantity: 10, averagePrice: 7.5, accumulatedLoss: 10),
                 'operation' => new Operation(type: OperationType::SELL, quantity: 5, price: 10),
                 'expected' => new PositionUpdateResult(
-                    position: new Position(quantity: 5, averagePrice: 7.5, accumulatedLoss: 0),
-                    compensatedProfit: 2.5,
+                    position: new Position(quantity: 5, averagePrice: 7.5, accumulatedLoss: 10),
+                    compensatedProfit: 12.5,
                     operationValue: 50,
                 ),
             ],

@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace Stock\Domain\Taxation\Rules;
 
 use Stock\Domain\Shared\Enums\OperationType;
+use Stock\Domain\Shared\Rules\TaxExemptionLimit;
 use Stock\Domain\Taxation\ProcessedOperation;
 use Stock\Domain\Taxation\Rules\Contracts\Rule;
 
 readonly class Sell implements Rule
 {
-    private const float MAX_TAX_FREE_PROFIT = 20_000;
-
     private const float TAX_RATE = 0.20;
 
     public function __construct()
@@ -35,6 +34,6 @@ readonly class Sell implements Rule
     public function supports(ProcessedOperation $operation): bool
     {
         return $operation->type === OperationType::SELL
-            && $operation->operationValue > self::MAX_TAX_FREE_PROFIT;
+            && !TaxExemptionLimit::isExempt($operation->operationValue);
     }
 }

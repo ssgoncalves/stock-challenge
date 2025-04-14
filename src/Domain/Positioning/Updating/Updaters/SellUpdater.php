@@ -9,6 +9,7 @@ use Stock\Domain\Positioning\Position;
 use Stock\Domain\Positioning\Updating\PositionUpdateResult;
 use Stock\Domain\Shared\DTOs\Operation;
 use Stock\Domain\Shared\Enums\OperationType;
+use Stock\Domain\Shared\Rules\TaxExemptionLimit;
 
 class SellUpdater implements PositionUpdater
 {
@@ -31,8 +32,15 @@ class SellUpdater implements PositionUpdater
             ? $loss = abs($saleBalance)
             : $profit = $saleBalance;
 
-        $compensatedLoss = max(0, $position->accumulatedLoss - $profit) + $loss;
-        $compensatedProfit = max(0, $profit - $position->accumulatedLoss);
+        $compensatedValues = $this->getCompensatedValues(
+            position: $position,
+            sellValue: $sellValue,
+            profit: $profit,
+            loss: $loss,
+        );
+
+        $compensatedLoss = $compensatedValues['loss'];
+        $compensatedProfit = $compensatedValues['profit'];
 
         $averagePrice = $newQuantity < 1
             ? 0
@@ -49,6 +57,25 @@ class SellUpdater implements PositionUpdater
             compensatedProfit: $compensatedProfit,
             operationValue: $sellValue,
         );
+    }
+
+    /**
+     * @return array<string, float>
+     */
+    private function getCompensatedValues(Position $position, float $sellValue, float $profit, float $loss): array
+    {
+
+        if (TaxExemptionLimit::isExempt($sellValue)){
+            return [
+                'profit' => $profit,
+                'loss' => $position->accumulatedLoss + $loss,
+            ];
+        }
+
+        return [
+            'loss' => max(0, $position->accumulatedLoss - $profit) + $loss,
+            'profit' => max(0, $profit - $position->accumulatedLoss),
+        ];
     }
 
 }
