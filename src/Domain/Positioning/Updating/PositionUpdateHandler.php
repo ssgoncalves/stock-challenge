@@ -18,7 +18,6 @@ class PositionUpdateHandler
     {
     }
 
-
     public function update(Position $position, Operation $operation): PositionUpdateResult
     {
 

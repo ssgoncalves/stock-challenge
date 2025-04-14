@@ -2,27 +2,10 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
-use Stock\Application\Taxation\CalculateTaxUseCase;
-use Stock\Domain\Positioning\Updating\PositionUpdateHandler;
-use Stock\Domain\Positioning\Updating\Updaters\BuyUpdater;
-use Stock\Domain\Positioning\Updating\Updaters\SellUpdater;
 use Stock\Domain\Shared\DTOs\Operation;
-use Stock\Domain\Taxation\Rules\Sell;
-use Stock\Domain\Taxation\TaxEngine;
+use Stock\Infrastructure\Taxation\CalculateTaxUseCaseFactory;
 
-$sellUpdater = new SellUpdater();
-$buyUpdater = new BuyUpdater();
-
-$taxEngine = new TaxEngine(rules: [new Sell()]);
-
-$positionUpdateHandler = new PositionUpdateHandler(
-    updaters: [$sellUpdater, $buyUpdater],
-);
-
-$calculateTax = new CalculateTaxUseCase(
-    positionUpdateHandler: $positionUpdateHandler,
-    taxEngine: $taxEngine,
-);
+$calculateTax = CalculateTaxUseCaseFactory::create();
 
 $operationsJson = '[{"operation":"buy", "unit-cost":10.00, "quantity": 100},
 {"operation":"sell", "unit-cost":15.00, "quantity": 50},
